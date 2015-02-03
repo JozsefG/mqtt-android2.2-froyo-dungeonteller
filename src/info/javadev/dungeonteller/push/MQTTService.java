@@ -40,7 +40,7 @@ public class MQTTService extends Service {
             String topic = String.format("%s/%s/%s", TOPIC_PREFIX, realm, playerName);
             //Subscribe to realm / player
 
-            mqttClient.subscribe(topic.toLowerCase());
+            mqttClient.subscribe(topic.toLowerCase().replace(" ", "_"));
 
 
         } catch (MqttException e) {
