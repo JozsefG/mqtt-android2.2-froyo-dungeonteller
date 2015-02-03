@@ -15,13 +15,13 @@ import org.eclipse.paho.client.mqttv3.persist.MemoryPersistence;
 public class MQTTService extends Service {
 
     public static final String BROKER_URL = "tcp://broker.mqttdashboard.com:1883";
-    //public static final String BROKER_URL = "tcp://test.mosquitto.org:1883";
+    //public static final String BROKER_URL = "/tcp://test.mosquitto.org:1883";
 
     /* In a real application, you should get an Unique Client ID of the device and use this, see
     http://android-developers.blogspot.de/2011/03/identifying-app-installations.html */
-    public static final String clientId = "android-client";
+    public static final String clientId = "dungeontelleryee";
 
-    public static final String TOPIC = "de/eclipsemagazin/blackice/warnings";
+    public static final String TOPIC_PREFIX = "info/javadev/dungeonteller/char";
     private MqttClient mqttClient;
 
 
@@ -38,8 +38,15 @@ public class MQTTService extends Service {
             mqttClient.setCallback(new PushCallback(this));
             mqttClient.connect();
 
-            //Subscribe to all subtopics of homeautomation
-            mqttClient.subscribe(TOPIC);
+            String realm = (String) intent.getExtras().get("realm");
+            String playerName = (String) intent.getExtras().get("playername");
+
+            String topic = String.format("%s/%s/%s", TOPIC_PREFIX, realm, playerName);
+            //Subscribe to realm / player
+
+            mqttClient.subscribe(topic);
+
+
 
 
         } catch (MqttException e) {

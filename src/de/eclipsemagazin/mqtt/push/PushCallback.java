@@ -6,7 +6,9 @@ import android.app.PendingIntent;
 import android.content.Context;
 import android.content.ContextWrapper;
 import android.content.Intent;
-import org.eclipse.paho.client.mqttv3.*;
+import org.eclipse.paho.client.mqttv3.IMqttDeliveryToken;
+import org.eclipse.paho.client.mqttv3.MqttCallback;
+import org.eclipse.paho.client.mqttv3.MqttMessage;
 
 
 public class PushCallback implements MqttCallback {
@@ -29,14 +31,16 @@ public class PushCallback implements MqttCallback {
                 context.getSystemService(Context.NOTIFICATION_SERVICE);
 
         final Notification notification = new Notification(R.drawable.snow,
-                "Black Ice Warning!", System.currentTimeMillis());
+                "DungeonTeller!", System.currentTimeMillis());
 
         // Hide the notification after its selected
         notification.flags |= Notification.FLAG_AUTO_CANCEL;
+        notification.flags |= Notification.DEFAULT_SOUND;
+        notification.flags |= Notification.DEFAULT_VIBRATE;
 
         final Intent intent = new Intent(context, BlackIceActivity.class);
         final PendingIntent activity = PendingIntent.getActivity(context, 0, intent, 0);
-        notification.setLatestEventInfo(context, "Black Ice Warning", "Outdoor temperature is " +
+        notification.setLatestEventInfo(context, "Queue warning", "Query Ready :  " +
                 new String(mqttMessage.getPayload()) + "°", activity);
         notification.number += 1;
         notificationManager.notify(0, notification);

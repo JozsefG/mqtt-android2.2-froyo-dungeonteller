@@ -7,6 +7,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.EditText;
 
 public class BlackIceActivity extends Activity {
 
@@ -57,6 +58,11 @@ public class BlackIceActivity extends Activity {
     private void startBlackIceService() {
 
         final Intent intent = new Intent(this, MQTTService.class);
+
+
+        intent.putExtra("realm", ((EditText) findViewById(R.id.editText2)).getText().toString());
+        intent.putExtra("playername", ((EditText) findViewById(R.id.editText3)).getText().toString());
+
         startService(intent);
     }
 
