@@ -1,4 +1,4 @@
-package de.eclipsemagazin.mqtt.push;
+package info.javadev.dungeonteller.push;
 
 import android.app.Service;
 import android.content.Intent;
@@ -8,10 +8,6 @@ import org.eclipse.paho.client.mqttv3.MqttClient;
 import org.eclipse.paho.client.mqttv3.MqttException;
 import org.eclipse.paho.client.mqttv3.persist.MemoryPersistence;
 
-
-/**
- * @author Dominik Obermaier
- */
 public class MQTTService extends Service {
 
     public static final String BROKER_URL = "tcp://broker.mqttdashboard.com:1883";
@@ -44,9 +40,7 @@ public class MQTTService extends Service {
             String topic = String.format("%s/%s/%s", TOPIC_PREFIX, realm, playerName);
             //Subscribe to realm / player
 
-            mqttClient.subscribe(topic);
-
-
+            mqttClient.subscribe(topic.toLowerCase());
 
 
         } catch (MqttException e) {

@@ -1,4 +1,4 @@
-package de.eclipsemagazin.mqtt.push;
+package info.javadev.dungeonteller.push;
 
 import android.app.Notification;
 import android.app.NotificationManager;
@@ -35,10 +35,12 @@ public class PushCallback implements MqttCallback {
 
         // Hide the notification after its selected
         notification.flags |= Notification.FLAG_AUTO_CANCEL;
-        notification.flags |= Notification.DEFAULT_SOUND;
-        notification.flags |= Notification.DEFAULT_VIBRATE;
 
-        final Intent intent = new Intent(context, BlackIceActivity.class);
+        notification.defaults |= Notification.DEFAULT_SOUND;
+        notification.defaults |= Notification.DEFAULT_LIGHTS;
+        notification.defaults |= Notification.DEFAULT_VIBRATE;
+
+        final Intent intent = new Intent(context, DungeonTellerActivity.class);
         final PendingIntent activity = PendingIntent.getActivity(context, 0, intent, 0);
         notification.setLatestEventInfo(context, "Queue warning", "Query Ready :  " +
                 new String(mqttMessage.getPayload()) + "°", activity);

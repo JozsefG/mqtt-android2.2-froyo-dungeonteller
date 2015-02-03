@@ -1,4 +1,4 @@
-package de.eclipsemagazin.mqtt.push;
+package info.javadev.dungeonteller.push;
 
 import android.app.Activity;
 import android.app.ActivityManager;
@@ -9,9 +9,9 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 
-public class BlackIceActivity extends Activity {
+public class DungeonTellerActivity extends Activity {
 
-    public static final String SERVICE_CLASSNAME = "de.eclipsemagazin.mqtt.push.MQTTService";
+    public static final String SERVICE_CLASSNAME = "info.javadev.dungeonteller.push.MQTTService";
     private Button button;
 
     @Override
